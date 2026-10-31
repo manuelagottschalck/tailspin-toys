@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { clampRating, formatStarRating } from './ratings';
+import { clampRating, formatRatingValue, formatStarRating } from './ratings';
 
 describe('clampRating', () => {
     it('returns the value unchanged when within range', () => {
@@ -47,5 +47,15 @@ describe('formatStarRating', () => {
 
     it('is deterministic for the same input', () => {
         expect(formatStarRating(3.5)).toBe(formatStarRating(3.5));
+    });
+});
+
+describe('formatRatingValue', () => {
+    it('formats a rating out of five', () => {
+        expect(formatRatingValue(4.25)).toBe('4.3 / 5');
+    });
+
+    it('shows a message when the rating is null', () => {
+        expect(formatRatingValue(null)).toBe('No rating yet');
     });
 });
